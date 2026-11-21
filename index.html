@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ниши для OSS-проекта</title>
+<style>
+:root{--bg:#f7f7f4;--card:#fff;--ink:#1c1c1a;--mute:#6b6a64;--line:#e4e2da;--acc:#00a7d0;--ok:#1f8a4c;--mid:#b7791f;--bad:#c2410c;--chip:#efeee8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141413;--card:#1d1d1b;--ink:#ecebe6;--mute:#9b9a93;--line:#2e2d2a;--chip:#2a2926;--ok:#4ade80;--mid:#fbbf24;--bad:#fb923c}}
+:root[data-theme="dark"]{--bg:#141413;--card:#1d1d1b;--ink:#ecebe6;--mute:#9b9a93;--line:#2e2d2a;--chip:#2a2926;--ok:#4ade80;--mid:#fbbf24;--bad:#fb923c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:28px;margin:0 0 6px;letter-spacing:-.02em}
+h2{font-size:18px;margin:32px 0 10px}
+.sub{color:var(--mute);margin:0 0 20px;max-width:900px}
+a{color:inherit}
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:24px}
+.ins{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.ins b{display:block;margin-bottom:4px}
+.ins small{color:var(--mute)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
+.bar .lbl{color:var(--mute);font-size:12px;min-width:84px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+input[type=search],select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:13px}
+input[type=search]{flex:1;min-width:200px}
+details.weights{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:6px 0 18px;font-size:13px}
+details.weights summary{cursor:pointer;color:var(--mute)}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 20px;margin-top:10px}
+.wgrid label{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.wgrid input{width:110px}
+.count{color:var(--mute);font-size:13px;margin:0 0 10px}
+.cards{display:grid;gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:64px 1fr;gap:4px 16px}
+.card.taken{opacity:.72}
+.score{grid-row:1/span 3;text-align:center}
+.score b{display:block;font-size:26px;font-variant-numeric:tabular-nums;line-height:1.1}
+.score small{color:var(--mute);font-size:11px}
+.score.hi b{color:var(--ok)}.score.md b{color:var(--mid)}.score.lo b{color:var(--mute)}
+.head{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.head h3{margin:0;font-size:17px}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;background:var(--chip);white-space:nowrap}
+.tag.taken{background:transparent;border:1px solid var(--bad);color:var(--bad)}
+.pitch{color:var(--mute);margin:2px 0 6px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--mute)}
+.meta b{color:var(--ink);font-weight:600}
+.dots{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mute);margin-top:6px}
+.dots span i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--line);margin-left:2px}
+.dots span i.f{background:var(--acc)}
+.inc{margin:8px 0 2px;font-size:13px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.inc a{text-decoration:none;border-bottom:1px dotted var(--mute)}
+.inc em{color:var(--mute);font-style:normal}
+.more{grid-column:2;font-size:13.5px}
+.more summary{cursor:pointer;color:var(--acc);font-size:13px;margin-top:6px}
+.more dl{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;margin:10px 0 0}
+.more dt{color:var(--mute)}
+.more dd{margin:0}
+ol.play{padding-left:20px;max-width:920px}
+ol.play li{margin-bottom:6px}
+.foot{color:var(--mute);font-size:12.5px;margin-top:28px;max-width:900px}
+@media (max-width:640px){.card{grid-template-columns:1fr}.score{grid-row:auto;text-align:left;display:flex;gap:8px;align-items:baseline}.more{grid-column:1}.more dl{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Ниши для своего OSS-проекта под Global Talent</h1>
+<p class="sub">Где Go-инженер продуктовой разработки может сделать инструмент, который сам использует в работе, может измеримо показать пользу и набрать звёзды. Метрики GitHub сняты 21.11.2026 через <code>gh api</code>. Оценки по шкале 1–5 и потолок звёзд — моя экспертная оценка, а не измерение. Веса итогового балла можно поменять ниже.</p>
+
+<div class="insights">
+  <div class="ins"><b>Цифра в заголовке</b>Больше всего звёзд набрали проекты 2026 года, которые обещают измеримый результат: rtk («−60–90% токенов», 87k★), caveman (122k★), mermaid-rs-renderer («в 500–1000 раз быстрее», 1,8k★ за полгода).<small>Нужна одна цифра «было → стало», которую любой может воспроизвести.</small></div>
+  <div class="ins"><b>Агент как пользователь</b>CLI и MCP для агентов растут быстрее всего: googleworkspace/cli 32k★, larksuite/cli 18k★, agentsview 6,5k★, shrt (gRPC-регрессия для агентов) 3,1k★.<small>Режим <code>--json</code> и MCP-сервер стоит закладывать с первого дня.</small></div>
+  <div class="ins"><b>Один бинарь вместо стека</b>Хорошо заходит лёгкая замена тяжёлого инструмента: Node, Java, Electron или Docker Compose из пяти сервисов заменяет один Go-бинарь.<small>Это естественное преимущество Go.</small></div>
+  <div class="ins"><b>Брошенный лидер</b>У kcat, evans, adr-tools, Sourcetrail, go-cleanarch, apisprout и tracetest много звёзд, но они не развиваются. Пользователи уже есть, им нужна замена.<small>В README прямо пиши «замена X» и делай гайд по миграции.</small></div>
+</div>
+
+<div class="bar"><span class="lbl">Категория</span><span id="fcat"></span></div>
+<div class="bar"><span class="lbl">Статус</span><span id="fstat"></span></div>
+<div class="bar"><span class="lbl">Сложность</span><span id="feff"></span></div>
+<div class="bar"><span class="lbl">Поиск</span><input type="search" id="q" placeholder="kafka, grpc, mermaid, агент…"><select id="sort"><option value="score">По баллу</option><option value="demand">По спросу</option><option value="gap">По свободе ниши</option><option value="weeks">По сроку MVP</option></select></div>
+
+<details class="weights"><summary>Веса итогового балла</summary>
+<div class="wgrid" id="wgrid"></div>
+<p class="count" style="margin-top:8px">Балл = Σ(вес × оценка) / Σ(вес × 5) × 100. «Простота» = 6 − сложность.</p>
+</details>
+
+<p class="count" id="count"></p>
+<div class="cards" id="cards"></div>
+
+<h2>Как запускать, чтобы появился адопшн</h2>
+<ol class="play">
+  <li><b>Сначала используй сам.</b> Две-четыре недели гоняй инструмент на рабочих задачах и собери цифры «до → после»: секунды, токены, доллары, минуты CI. Это и заголовок README, и доказательство для визы.</li>
+  <li><b>README как лендинг.</b> Сверху GIF или asciinema (снимается в <a href="https://github.com/charmbracelet/vhs">vhs</a>), одна цифра и установка в одну строку: <code>go install</code>, brew, <code>curl | sh</code>. Если ниша занята брошенным лидером, добавь сравнение с ним.</li>
+  <li><b>Запуск в один день.</b> Show HN, r/golang, r/programming или r/LocalLLaMA для AI-тем, Gophers Slack, Хабр и Telegram-чаты (Podlodka AI Club, Devhands). Через 1–2 недели — PR в awesome-go, awesome-mcp-servers и соседние awesome-списки.</li>
+  <li><b>Встраивайся в чужие экосистемы.</b> Пиши модуль для testcontainers, GitHub Action, интеграции с LangChainGo, genkit и eino, отвечай в issues брошенного лидера («есть замена»). Это даёт и звёзды, и зависимых.</li>
+  <li><b>Для визы звёзд мало.</b> Собирай всё вместе: dependents («Used by»), скачивания релизов и Homebrew, импорты на pkg.go.dev, issues и PR от людей из компаний, упоминания в статьях и докладах, письма пользователей. Скрин каждого такого сигнала сохраняй сразу.</li>
+  <li><b>Темп релизов.</b> Еженедельный changelog и быстрые ответы на issues в первые два месяца. Звёзды от запуска быстро забываются, а живой трекер удерживает пользователей.</li>
+</ol>
+
+<p class="foot">Источники: GitHub REST API (stars, pushed_at, open_issues, releases) на 21.11.2026; поиск GitHub по нишам — проекты, созданные в 2026 году на Go и Rust, отсортированы по звёздам. «Заброшен» означает, что последний релиз или пуш был больше года назад. Цифры в поле «Метрика для демо» — гипотезы, которые нужно измерить, а не обещания.</p>
+</div>
+
+<script>
+const D=[
+{id:"llm-vcr",t:"VCR и mock-сервер для LLM-вызовов в тестах",p:"Записать ответы OpenAI, Anthropic и Gemini один раз, затем воспроизводить их детерминированно и бесплатно, включая стриминг и tool calls.",cat:"AI для продуктовых команд",lang:"Go",st:"open",
+inc:[["dnaeon/go-vcr",1400,"общий HTTP, без SSE и матчинга промптов"],["promptfoo/promptfoo",27513,"evals, не юнит-тесты"],["theblixguy/llm-mock-server",5,""],["enrico9034/llmock",3,""],["codesweep-ai/vcr",2,""]],
+gap:"Десяток попыток по 0–10★ на разных языках: спрос виден, явного лидера нет. go-vcr ничего не знает о SSE, tool calls и недетерминированных полях.",
+build:"Go-библиотека и прокси на любом языке: режимы record, replay и strict; поддержка OpenAI, Anthropic, Gemini и Responses API; SSE-стриминг; матчинг запросов без timestamp и id; маскирование ключей; инъекция сбоев (429, таймаут, обрыв стрима); модуль testcontainers.",
+metric:"LLM в CI обходится в $0 и 0 с; тест-сьют с LLM ускоряется с ~40 с до ~2 с.",ch:"r/golang, Show HN, r/LocalLLaMA, issues LangChainGo, genkit и eino, awesome-go",
+s:{d:4,g:5,f:5,u:5,e:2,v:4},w:3,cap:"1–5k"},
+{id:"trace-viewer",t:"Локальный просмотрщик трейсов LLM и агентов (OTel GenAI)",p:"Один бинарь принимает OTLP и показывает дерево run → вызов модели → вызов инструмента: токены, стоимость, латентность.",cat:"Observability",lang:"Go",st:"open",
+inc:[["langfuse/langfuse",37691,"self-host: Postgres, ClickHouse, Redis"],["CtrlSpice/otel-desktop-viewer",1322,"нет GenAI-вида"],["ymtdzzz/otel-tui",1140,"нет GenAI-вида"],["nishantmodak/ltrace",1,""],["Urthella/agent-trace-viewer",0,""]],
+gap:"Есть тяжёлые платформы и общие OTel-просмотрщики. Лёгкого локального инструмента под семантические конвенции GenAI почти нет.",
+build:"OTLP gRPC/HTTP приёмник, хранение в SQLite или DuckDB, веб-UI и TUI, diff двух прогонов агента, стоимость по прайсу моделей, MCP-сервер, через который агент читает собственные трейсы.",
+metric:"Запуск за ~1 с одним бинарём вместо docker compose из пяти сервисов.",ch:"Show HN, r/LocalLLaMA, OpenTelemetry Slack (#otel-genai), awesome-mcp",
+s:{d:5,g:4,f:4,u:4,e:3,v:5},w:5,cap:"2–10k"},
+{id:"tia",t:"Test impact analysis для Go",p:"Запускать только тесты, которые затрагивает diff: и в CI, и в каждом цикле агента.",cat:"Тестирование",lang:"Go",st:"open",
+inc:[["gotestyourself/gotestsum",2739,"не выбирает тесты"],["emoss08/assay",2,""],["itaywol/testless",5,"Rust, для TypeScript"]],
+gap:"Для Go готового решения нет. go test кэширует результаты, но не выбирает тесты по diff на уровне функций.",
+build:"Граф пакетов через go/packages и карта покрытия per test; <code>gotia run --since origin/main</code>; безопасный откат на полный прогон (init, embed, testdata, cgo); GitHub Action; режим для агентов с компактным выводом.",
+metric:"CI ускоряется с ~12 до ~2 мин; цикл правка → тест у агента в разы короче.",ch:"r/golang, Gophers Slack, GopherCon lightning talk, Хабр",
+s:{d:4,g:5,f:5,u:5,e:3,v:4},w:4,cap:"1–4k"},
+{id:"mutation-ai",t:"Мутационное тестирование тестов, которые пишет агент",p:"Проверить, ловят ли сгенерированные тесты баги, и найти «плацебо-ассерты».",cat:"Тестирование",lang:"Go",st:"open",
+inc:[["zimmski/go-mutesting",679,"заброшен с 2024"],["go-gremlins/gremlins",472,"69 открытых issues"],["avito-tech/go-mutesting",286,"форк"],["dddcodeme/tiny-bug-verifier",1,"Python"]],
+gap:"Go-инструменты медленные и старые. Подачи «качество AI-тестов» ни у кого нет.",
+build:"Мутации через <code>go test -overlay</code> без копирования дерева; только по строкам из diff PR; отчёт о тестах, которые не убили ни одной мутации; комментарий в PR; skill или MCP «усиль тесты». Хорошо сочетается с test impact analysis.",
+metric:"«N% AI-тестов не ловят ни одной мутации» плюс рост mutation score после итерации.",ch:"Show HN, r/golang, AI-чаты, статья с исследованием на открытых репо",
+s:{d:3,g:4,f:5,u:5,e:3,v:4},w:4,cap:"1–3k"},
+{id:"adr-agents",t:"ADR для людей и агентов",p:"Решения команды в репо: проверка в CI и выдача агенту релевантных ADR перед правкой.",cat:"Архитектура и диаграммы",lang:"Go",st:"open",
+inc:[["npryce/adr-tools",5784,"последний релиз 2018"],["thomvaill/log4brains",1613,"не развивается с 12.2024"],["marouni/adr",122,""],["archgate/cli",74,"TypeScript, свежий"],["mbeacom/adrkit",26,""]],
+gap:"Лидеры ниши заброшены. Первые ADR-инструменты для агентов появились только в 2026 году и пока набрали десятки звёзд.",
+build:"<code>adr new | supersede | lint | site</code>; front matter с путями кода и правилами; <code>adr check</code> в CI: PR трогает зону ADR-12 → комментарий или блок; MCP или skill, которые отдают агенту решения по изменяемым файлам. Можно встроить в archspec.",
+metric:"Число нарушений решений, пойманных в CI; агент перестаёт откатывать принятые решения.",ch:"r/softwarearchitecture, Хабр, Podlodka, интеграция с OpenSpec и spec-kit",
+s:{d:3,g:5,f:5,u:5,e:2,v:3},w:3,cap:"0.5–3k"},
+{id:"arch-map",t:"Карта архитектуры Go-сервиса из кода (развитие archspec)",p:"Слои, зависимости и нарушения, C4, Mermaid и PlantUML прямо из кода, плюс diff архитектуры в PR.",cat:"Архитектура и диаграммы",lang:"Go",st:"open",
+inc:[["ondrajz/go-callvis",6527,"нужен Graphviz, медленный на больших репо"],["k1LoW/tbls",4400,"только БД"],["aoci-spec/aoci-code",2830,"свежий конкурент для агентов"],["jfeliu007/goplantuml",2081,""],["fe3dback/go-arch-lint",626,""],["krus210/archspec",16,"твой"]],
+gap:"go-callvis популярен, но устарел. Никто не делает интерактивную карту, diff архитектуры в PR и вывод для агента в одном инструменте.",
+build:"Развивать archspec: генерация из go/packages, интерактивный HTML с зумом, правила слоёв, комментарий «что поменялось в архитектуре» в PR, MCP для агента.",
+metric:"Карта сервиса на 300 тыс. строк строится за секунды; нарушения слоёв ловятся в CI.",ch:"r/golang, Хабр, awesome-go, сравнение с go-callvis в README",
+s:{d:4,g:3,f:5,u:5,e:3,v:4},w:4,cap:"1–5k"},
+{id:"mermaid-go",t:"Mermaid-рендерер на чистом Go без браузера",p:"Библиотека, CLI и WASM: Mermaid → SVG или ASCII за миллисекунды, без Chromium.",cat:"Архитектура и диаграммы",lang:"Go",st:"open",
+inc:[["mermaid-js/mermaid-cli",5180,"требует headless Chromium"],["1jehuang/mermaid-rs-renderer",1828,"Rust, 2026 — спрос подтверждён"],["zkrebbekx/go-mermaid",13,""]],
+gap:"Rust-версия быстро набрала звёзды. Для Go-экосистемы (Hugo, Gitea, генераторы документации) нативного рендерера нет.",
+build:"Flowchart, sequence, class, ER и state; совместимость с синтаксисом; ASCII-вывод для терминала и агентов; WASM-сборка; плагин для Hugo. Пригодится в pumlpad и archspec.",
+metric:"Рендер за ~2 мс против ~1,5 с у mermaid-cli, без браузера.",ch:"Show HN, r/golang, Hugo forum, awesome-go",
+s:{d:4,g:4,f:3,u:4,e:5,v:5},w:10,cap:"2–8k"},
+{id:"grpc-mock",t:"Mock-сервер для gRPC с записью трафика",p:"Стабы из .proto или reflection, плюс запись реального трафика в стабы одной командой.",cat:"Моки и контракты",lang:"Go",st:"open",
+inc:[["tokopedia/gripmock",747,"последний релиз 05.2025"],["getmockd/mockd",155,""],["bilibili-base/powermock",105,"заброшен"],["bavix/gripmock",78,"форк"]],
+gap:"Лидер ниши медленно развивается. Record-режима, stateful-сценариев и модуля testcontainers нет ни у кого.",
+build:"Прокси-запись → YAML-стабы; матчинг по полям; stateful-сценарии; in-process режим через bufconn для Go-тестов; модуль testcontainers; MCP, через который агент сам генерирует стабы.",
+metric:"Интеграционный тест без зависимых сервисов; стабы из трафика за 1 команду.",ch:"r/golang, gRPC community, testcontainers community modules",
+s:{d:3,g:4,f:5,u:5,e:3,v:3},w:4,cap:"0.5–3k"},
+{id:"openapi-mock",t:"OpenAPI mock и валидирующий прокси одним бинарём",p:"Замена Prism, WireMock и Mockoon: мок по спеке и проверка, что реальный сервис ей соответствует.",cat:"Моки и контракты",lang:"Go",st:"open",
+inc:[["mockoon/mockoon",8494,"Electron"],["wiremock/wiremock",7432,"Java"],["stoplightio/prism",5072,"Node"],["danielgtaylor/apisprout",716,"заброшен с 2022"],["muonsoft/openapi-mock",529,""],["mockzilla/mockzilla",111,""]],
+gap:"Сильные инструменты есть, но они на Node, Java или Electron. Среди Go-вариантов лидер заброшен.",
+build:"<code>mock serve api.yaml</code>: примеры и генерация данных, валидация запросов и ответов, режим прокси для поиска расхождений между сервисом и спекой, сценарии, record, модуль testcontainers, библиотека для in-process тестов.",
+metric:"Старт и память против Prism — гипотеза ×10–50, нужно измерить.",ch:"Show HN, r/golang, r/webdev, OpenAPI Slack",
+s:{d:4,g:3,f:5,u:5,e:3,v:4},w:4,cap:"1–5k"},
+{id:"json-server",t:"json-server одним Go-бинарём",p:"db.json → REST API с фильтрами и связями, OpenAPI генерируется автоматически.",cat:"Моки и контракты",lang:"Go",st:"open",
+inc:[["typicode/json-server",75750,"722 открытых issues, пуш 03.2026"],["mockoon/mockoon",8494,""]],
+gap:"Спрос огромный, лидер развивается медленно. Аудитория — фронтенд, это не твой профиль, и клоны уже были.",
+build:"Совместимость с форматом json-server, фильтры, пагинация, связи, авто-OpenAPI, задержки и ошибки, снапшоты, Docker-образ на 5 МБ.",
+metric:"Не нужны npx и Node; ×N RPS — измерить.",ch:"Show HN, r/webdev, r/javascript, Product Hunt",
+s:{d:5,g:2,f:3,u:2,e:2,v:4},w:2,cap:"1–10k"},
+{id:"kafka-cli",t:"Kafka CLI — замена kcat",p:"tail, поиск и replay сообщений с декодированием Protobuf и Avro и JSON-выводом для агентов.",cat:"Брокеры и данные",lang:"Go",st:"open",
+inc:[["edenhill/kcat",5792,"последний релиз 2021, 160 issues"],["kafbat/kafka-ui",2852,"веб"],["birdayz/kaf",2447,""],["deviceinsight/kafkactl",1074,""]],
+gap:"Самый известный CLI заброшен. Go-альтернативы есть, но фильтров (jq или CEL), Schema Registry и агентского режима у них нет.",
+build:"consume и produce с фильтрами CEL или jq, Protobuf и Avro через Schema Registry, поиск по offset и времени, replay между топиками, <code>--json</code>, MCP.",
+metric:"Сообщение по полю в топике находится за секунды.",ch:"r/apachekafka, r/golang, Confluent community",
+s:{d:4,g:3,f:4,u:5,e:3,v:3},w:4,cap:"1–3k"},
+{id:"grpc-tui",t:"TUI-клиент для gRPC — замена evans",p:"Postman для gRPC в терминале: reflection, история, коллекции в git, стриминг.",cat:"API-клиенты",lang:"Go",st:"open",
+inc:[["fullstorydev/grpcurl",12887,"CLI"],["darrenburns/posting",12647,"HTTP TUI"],["fullstorydev/grpcui",5935,"веб"],["ktr0731/evans",4492,"последний релиз 02.2023"]],
+gap:"evans не развивается с 2023 года. Успех posting показывает, что API-клиенты в терминале востребованы.",
+build:"Bubble Tea UI, reflection и .proto, автодополнение полей, env-файлы, коллекции в git, server-streaming, экспорт в grpcurl, неинтерактивный режим для агентов.",
+metric:"GIF-демо; путь от открытия до вызова метода в 3 нажатия.",ch:"r/golang, r/commandline, charm community, Show HN",
+s:{d:4,g:4,f:5,u:5,e:3,v:4},w:5,cap:"1–5k"},
+{id:"trace-test",t:"Trace-based assertions в Go-тестах",p:"<code>spantest.Assert(t).Span(\"db.query\").Count(1)</code> — ловит N+1 и лишние вызовы прямо в юнит-тесте.",cat:"Observability",lang:"Go",st:"open",
+inc:[["kubeshop/tracetest",1332,"не развивается с 06.2025"],["kube-tarian/quality-trace",12,""]],
+gap:"Трейсы проверяют только в e2e через тяжёлые платформы. Лёгкой библиотеки для go test нет.",
+build:"In-process exporter, DSL ассертов (count, duration, attrs, parent-child), снапшоты дерева спанов, сообщения об ошибках в стиле testify.",
+metric:"N+1 и пропущенный кэш ловятся тестом, а не в проде.",ch:"r/golang, OpenTelemetry Slack, Хабр",
+s:{d:3,g:5,f:5,u:4,e:2,v:3},w:3,cap:"0.3–2k"},
+{id:"flaky",t:"Трекер flaky-тестов для go test",p:"История запусков в CI, оценка нестабильности, автокарантин и отчёт в PR.",cat:"Тестирование",lang:"Go",st:"open",
+inc:[["gotestyourself/gotestsum",2739,"только --rerun-fails"],["runetsk/ttgo",6,""]],
+gap:"Есть SaaS (BuildPulse и др.), а простого OSS-решения на GitHub Actions нет.",
+build:"GitHub Action разбирает <code>go test -json</code>, хранит историю в ветке или артефактах, считает flakiness score, ведёт список карантина с автоматическим <code>t.Skip</code>, пишет комментарий в PR.",
+metric:"Доля красных прогонов из-за flaky падает с X% до Y%.",ch:"r/golang, GitHub Marketplace, Хабр",
+s:{d:3,g:4,f:5,u:4,e:2,v:3},w:3,cap:"0.5–2k"},
+{id:"go-diag",t:"Диагностика Go-рантайма для агентов",p:"pprof, дампы горутин и трейсы сжимаются в короткий отчёт, который агент может прочитать.",cat:"Observability",lang:"Go",st:"open",
+inc:[["uber-go/goleak",5317,"только тесты"],["maruel/panicparse",3705,"только крэш-дампы"],["arl/statsviz",3646,"визуализация"],["jcastilloa/gaz-mcp",1,""]],
+gap:"Инструменты для людей есть. Сжатия профилей в отчёт для LLM и сравнения двух профилей «до и после» нет.",
+build:"CLI и MCP: снять профиль с <code>/debug/pprof</code>, сгруппировать горутины, top-N горячих путей, diff двух профилей, подозрение на утечку.",
+metric:"Дамп 50 МБ превращается в отчёт на 2 КБ; агент находит утечку без человека.",ch:"r/golang, awesome-mcp, Gophers Slack",
+s:{d:3,g:4,f:4,u:4,e:3,v:3},w:3,cap:"0.5–2k"},
+{id:"atl-cli",t:"Confluence CLI для агентов",p:"Синхронизация страниц с Markdown, поиск, комментарии и JSON-вывод: дешевле по токенам, чем MCP.",cat:"Агентские CLI",lang:"Go",st:"open",
+inc:[["googleworkspace/cli",32419,"паттерн, Rust"],["larksuite/cli",18175,"паттерн"],["ankitpokhrel/jira-cli",6088,"только Jira"],["pchuri/confluence-cli",330,"JS"],["BjoernSchotte/atlcli",53,""]],
+gap:"Для Jira сильный CLI есть, для Confluence — нет. Риск: сначала проверь возможности официального Atlassian CLI.",
+build:"pull и push страниц в Markdown, поиск по CQL, комментарии, вложения, <code>--json</code>, skill для агентов, OAuth и PAT.",
+metric:"Токены на задачу против Confluence MCP — измерить.",ch:"r/atlassian, AI-чаты, awesome-cli",
+s:{d:4,g:3,f:4,u:5,e:2,v:3},w:3,cap:"0.5–3k"},
+{id:"gotest-agent",t:"Сжатый вывод go test и go build для агентов",p:"Только упавшие тесты, обрезанные стеки и минимальный diff testify.",cat:"Агентские CLI",lang:"Go",st:"open",
+inc:[["rtk-ai/rtk",87342,"общий прокси, Rust"],["gotestyourself/gotestsum",2739,""],["kyoh86/richgo",856,""],["ejboy/agent-scripts",117,""]],
+gap:"rtk покрывает это в общем виде и может добавить Go-фильтры. Отдельным продуктом слабо, лучше как часть test impact analysis.",
+build:"Разбор <code>go test -json</code>, группировка падений, дедупликация, хук для Claude Code и Codex.",
+metric:"−70–90% токенов на прогон тестов.",ch:"AI-чаты, r/ClaudeAI",
+s:{d:4,g:2,f:5,u:5,e:1,v:4},w:1,cap:"0.5–3k"},
+{id:"skills-go",t:"Набор skills для Go-бэкенда с бенчмарком",p:"Skills для тестов, моков, testcontainers и миграций плюс открытый eval «с ними и без них».",cat:"Агентские CLI",lang:"Markdown/Go",st:"open",
+inc:[["samber/cc-skills-golang",3908,"общий набор"],["github/spec-kit",150871,"паттерн"]],
+gap:"Порог входа низкий, выделиться можно только измеримым бенчмарком. Хорошо работает как спутник основного проекта.",
+build:"10–15 skills, набор задач на открытых репо, прогон агентов, таблица pass rate.",
+metric:"+X п. п. тестов, которые проходят ревью и mutation score.",ch:"AI-чаты, r/ClaudeAI, Хабр",
+s:{d:4,g:2,f:5,u:5,e:1,v:3},w:2,cap:"0.5–4k"},
+{id:"pg-migr",t:"Проверка Postgres-миграций на shadow-БД",p:"Прогнать миграцию на копии схемы и измерить реальные блокировки и время.",cat:"Брокеры и данные",lang:"Go",st:"open",
+inc:[["sbdchd/squawk",1271,"статический линтер, Rust"],["stripe/pg-schema-diff",909,""]],
+gap:"Squawk анализирует SQL статически. Динамической проверки блокировок, встроенной в goose или migrate, нет.",
+build:"Поднять Postgres, применить миграцию, читать pg_locks и длительность, вынести вердикт в PR.",
+metric:"Опасная миграция ловится до прода.",ch:"r/PostgreSQL, r/golang",
+s:{d:3,g:3,f:4,u:4,e:3,v:3},w:4,cap:"0.5–2k"},
+{id:"outbox",t:"Transactional outbox и inbox для Go",p:"Postgres → Kafka или NATS с дедупликацией, ретраями и OTel-метриками.",cat:"Брокеры и данные",lang:"Go",st:"open",
+inc:[["dtm-labs/dtm",10935,"тяжёлый фреймворк"],["ThreeDotsLabs/watermill",9973,"forwarder"],["obsidiandynamics/goharvest",207,"заброшен"],["nikolayk812/pgx-outbox",153,""],["oagudo/outbox",139,""]],
+gap:"Небольшие библиотеки есть, явного лидера нет. Потолок звёзд у библиотек паттернов невысокий.",
+build:"pgx, LISTEN/NOTIFY, inbox-дедупликация, ретраи с DLQ, метрики, admin CLI.",
+metric:"Exactly-once эффект при перезапусках; бенчмарк сообщений в секунду.",ch:"r/golang, Хабр",
+s:{d:3,g:3,f:5,u:4,e:3,v:2},w:4,cap:"0.3–1.5k"},
+{id:"pgtest",t:"Изолированная Postgres-БД на каждый тест",p:"Template-БД, миграции один раз, тысячи тестов параллельно.",cat:"Тестирование",lang:"Go",st:"open",
+inc:[["DATA-DOG/go-sqlmock",6576,""],["testcontainers/testcontainers-go",5035,""],["ory/dockertest",4527,""],["peterldowns/pgtestdb",518,"уже решает задачу"]],
+gap:"Задача в основном решена (pgtestdb), потолок невысокий.",build:"—",metric:"—",ch:"—",
+s:{d:3,g:2,f:5,u:5,e:2,v:2},w:2,cap:"0.3–1k"},
+{id:"pr-canvas",t:"PR как холст: диаграмма изменений и код рядом",p:"Одна команда превращает diff в локальную страницу: граф затронутых функций и поток вызовов, а у каждого узла раскрывается код с изменениями. IDE не нужна.",cat:"Визуальное чтение кода",lang:"Go",st:"open",
+inc:[["ahmedkhaleel2004/gitdiagram",19047,"весь репо, не изменения"],["AsyncFuncAI/deepwiki-open",18469,"вики по репо"],["CodeBoarding/CodeBoarding",2692,"весь репо"],["umputun/revdiff",966,"TUI, без диаграмм"],["sodre90/mirador",31,"холст для агента, 11.2026"],["HelixMorphe/whats-this-pr",1,"10.2026"],["saurabh-oss/archilens",3,"11.2026"],["Nelson-PROIA/plot",0,"хакатон, 2026"]],
+gap:"Диаграммы для всего репозитория набирают 18–19k★, значит спрос на визуальное понимание кода доказан. Для ревью изменений с октября по ноябрь 2026 появилась волна попыток, но ни одна не набрала больше ~30★, и все строят граф только через LLM, без детерминированного анализа.",
+build:"<code>prcanvas main..HEAD</code> → локальный HTML. Граф затронутых функций и их вызывающих строится через go/packages детерминированно, без галлюцинаций. Узел раскрывается в код с diff, рядом sequence-диаграмма изменённого потока, показаны слои и границы пакетов. Аннотации агента через MCP или skill необязательны. GitHub Action прикладывает страницу к PR, есть экспорт в Mermaid. Синергия с revdiff и archspec.",
+metric:"Время ревью PR на 500+ строк: X → Y мин, измерить на своих PR. Читаешь «что поменялось в потоке», а не 30 файлов подряд.",ch:"Show HN (GIF решает), r/golang, r/programming, AI-чаты, Хабр",
+s:{d:5,g:5,f:5,u:5,e:3,v:5},w:5,cap:"2–10k"},
+{id:"code-board",t:"Доска для чтения кода: живые фрагменты и диаграмма",p:"Whiteboard, где карточки — живые куски кода по символам, стрелки — реальные вызовы, рядом от руки дорисованы схемы. Доска хранится в репо и обновляется вместе с кодом.",cat:"Визуальное чтение кода",lang:"Go + TS",st:"open",
+inc:[["excalidraw/excalidraw",136043,"доска без кода"],["tldraw/tldraw",51521,"SDK, лицензия для прода"],["CoatiSoftware/Sourcetrail",16454,"архивирован в 2021"],["microsoft/codetour",4605,"только VS Code"],["0-AI-UG/cate",2247,"холст-редактор"],["haystackeditor/haystack-editor",1289,"не развивается с 02.2025"],["petermost/Sourcetrail",771,"форк"]],
+gap:"Sourcetrail (16k★) мёртв, Haystack заброшен, CodeTour привязан к VS Code. Нет доски в браузере, где фрагменты кода живые, а связи взяты из анализа кода, а не нарисованы руками.",
+build:"Локальный сервер и холст на Excalidraw (MIT). Карточка — символ Go (через gopls или go/packages), её код подтягивается из рабочей копии и подсвечивает изменения. Рёбра строятся автоматически по графу вызовов. Доска хранится как JSON в репо, удобный для diff. Есть режим тура по коду и MCP: «агент, собери доску про auth flow».",
+metric:"Онбординг в сервис: время до первого PR новичка; доска «как работает X» собирается за 1 команду.",ch:"Show HN, r/golang, r/programming, Excalidraw community",
+s:{d:4,g:4,f:4,u:5,e:4,v:5},w:8,cap:"2–10k"},
+{id:"gherkin-api",t:"Gherkin для API-тестов без кода шагов (Karate для Go)",p:"Feature-файлы со встроенными шагами для HTTP, gRPC, SQL и Kafka; генерация сценариев из OpenAPI, proto и тикетов.",cat:"Тестирование",lang:"Go",st:"open",
+inc:[["onsi/ginkgo",9077,"BDD без Gherkin"],["karatelabs/karate",9009,"Java"],["smartystreets/goconvey",8396,"не развивается с 2024"],["cucumber/godog",2693,"шаги пишешь сам"],["vitalets/playwright-bdd",837,"фронтенд"],["cuber-it/qa-ta-ai-workbench",1,"AI-генерация Gherkin, Python"]],
+gap:"В godog каждый шаг нужно реализовать на Go. Аналога Karate (9k★) с готовыми шагами для бэкенда в Go нет. AI-генераторы Gherkin — Python-игрушки с 0–3★, и они не проверяют, что сценарий исполним.",
+build:"Один бинарь: встроенные шаги для HTTP, gRPC через reflection, SQL, Kafka; сравнение JSON по шаблону; <code>gen --from openapi.yaml</code> и <code>--from api.proto</code>; генерация сценариев агентом из тикета или спеки OpenSpec с валидацией (только известные шаги); HTML-отчёт как живая документация; свои шаги через godog.",
+metric:"Приёмочный тест на эндпоинт без строчки Go; критерии приёмки из тикета исполняются в CI.",ch:"r/golang, r/QualityAssurance, Ministry of Testing, Хабр",
+s:{d:4,g:4,f:5,u:4,e:3,v:4},w:5,cap:"1–4k"},
+{id:"ddd-lint",t:"DDD-линтер для Go (ArchUnit для Go)",p:"Правила bounded contexts и агрегатов проверяются в CI, а из кода генерируется карта контекстов.",cat:"Архитектура и диаграммы",lang:"Go",st:"open",
+inc:[["sverweij/dependency-cruiser",7449,"JS"],["TNG/ArchUnit",3901,"Java"],["tach-org/tach",2874,"Python"],["LemonAppDev/konsist",1767,"Kotlin"],["roblaszczak/go-cleanarch",984,"заброшен с 2021"],["fe3dback/go-arch-lint",626,"только импорты"],["arch-go/arch-go",285,""],["ContextMapper/context-mapper-dsl",275,"DSL, Java"]],
+gap:"Почти у каждого языка есть свой ArchUnit на 2–7k★. В Go есть только проверки импортов. Правил DDD (агрегаты, value objects, границы контекстов) нет ни у кого: поиск по «DDD linter» находит только пустые репо.",
+build:"Анализаторы go/analysis и плагин для golangci-lint. Конфиг контекстов и слоёв. Правила: domain не импортирует infra; соседние агрегаты связываются только по ID; value object неизменяем; доступ между контекстами только через контракты или ACL. API в стиле ArchUnit для тестов. Генерация context map в Mermaid и PlantUML. Логичнее встроить в archspec, чем начинать с нуля.",
+metric:"Нарушения границ ловятся в CI, в том числе в PR от агента.",ch:"r/golang, r/DomainDrivenDesign, DDD Crew, awesome-ddd (12k★), Хабр",
+s:{d:3,g:4,f:5,u:5,e:3,v:3},w:4,cap:"0.5–3k"},
+{id:"event-map",t:"Карта доменов и событий из Go-кода",p:"Найти продюсеров и консьюмеров Kafka/NATS и proto-события в коде и собрать интерактивный event flow по сервисам.",cat:"Архитектура и диаграммы",lang:"Go",st:"open",
+inc:[["event-catalog/eventcatalog",2975,"TS, документация пишется руками"],["k1LoW/tbls",4400,"аналог для БД"]],
+gap:"EventCatalog требует описывать события вручную, поэтому документация отстаёт от кода. Генератора из Go-кода нет.",
+build:"Статический анализ вызовов клиентов Kafka, NATS и watermill, связь с proto-схемами, граф «сервис → событие → сервис», экспорт в EventCatalog, Mermaid и PlantUML, diff в PR: «добавлен новый консьюмер».",
+metric:"Карта событий 20 сервисов собирается за минуту вместо дня ручной документации.",ch:"r/golang, r/softwarearchitecture, EventCatalog community",
+s:{d:3,g:4,f:5,u:4,e:3,v:4},w:4,cap:"0.5–2k"},
+{id:"repo-diagram",t:"AI-диаграмма всего репозитория",p:"gitdiagram, DeepWiki.",cat:"Визуальное чтение кода",lang:"TS/Python",st:"taken",
+inc:[["ahmedkhaleel2004/gitdiagram",19047,""],["AsyncFuncAI/deepwiki-open",18469,""],["CodeBoarding/CodeBoarding",2692,""],["swark-io/swark",1698,""]],
+gap:"Ниша занята, но она доказывает спрос на визуальное понимание кода. Свободно соседнее направление: изменения и живые доски.",build:"—",metric:"—",ch:"—",s:{d:5,g:1,f:4,u:3,e:3,v:5},w:4,cap:"—"},
+{id:"swag",t:"OpenAPI 3.1 из Go-кода (замена swag)",p:"Аннотации или code-first генерация спеки.",cat:"Моки и контракты",lang:"Go",st:"taken",
+inc:[["swaggo/swag",13055,"v2.0.0-rc6 с OAS 3.1, 09.2026"],["danielgtaylor/huma",4542,""],["goadesign/goa",6123,""]],
+gap:"Окно закрывается: swag v2 с OpenAPI 3.1 уже в RC.",build:"—",metric:"—",ch:"—",
+s:{d:4,g:1,f:5,u:4,e:3,v:2},w:4,cap:"—"},
+{id:"shrt",t:"Контрактная регрессия gRPC для агентов",p:"Снапшоты ответов и утверждённые человеком baseline.",cat:"Моки и контракты",lang:"Go",st:"taken",
+inc:[["N4darae/shrt",3121,"создан 09.2026"]],
+gap:"Уже занято, но это хороший ориентир: Go, твоя ниша, 3k★ за 2 месяца. Изучи их README и запуск.",build:"—",metric:"—",ch:"—",
+s:{d:4,g:1,f:5,u:5,e:3,v:4},w:4,cap:"—"},
+{id:"mocks",t:"Генератор моков",p:"mockgen, mockery, moq.",cat:"Тестирование",lang:"Go",st:"taken",
+inc:[["vektra/mockery",7183,""],["uber-go/mock",3433,""],["matryer/moq",2209,""],["gojuno/minimock",753,""]],
+gap:"Ниша насыщена, есть три живых лидера.",build:"—",metric:"—",ch:"—",s:{d:4,g:1,f:5,u:5,e:2,v:1},w:3,cap:"—"},
+{id:"load",t:"Нагрузочное тестирование",p:"k6, vegeta, hey.",cat:"Тестирование",lang:"Go",st:"taken",
+inc:[["grafana/k6",32373,""],["tsenart/vegeta",25250,""],["rakyll/hey",20802,""]],
+gap:"Насыщено.",build:"—",metric:"—",ch:"—",s:{d:4,g:1,f:4,u:3,e:3,v:2},w:4,cap:"—"},
+{id:"migr",t:"Инструмент миграций БД",p:"migrate, goose, atlas.",cat:"Брокеры и данные",lang:"Go",st:"taken",
+inc:[["golang-migrate/migrate",19045,""],["pressly/goose",11731,""],["ariga/atlas",8835,""]],
+gap:"Насыщено.",build:"—",metric:"—",ch:"—",s:{d:4,g:1,f:5,u:4,e:3,v:1},w:4,cap:"—"},
+{id:"tokens",t:"Прокси для экономии токенов",p:"rtk, caveman.",cat:"Агентские CLI",lang:"Rust/Go",st:"taken",
+inc:[["JuliusBrussee/caveman",121861,""],["rtk-ai/rtk",87342,""]],
+gap:"Ниша занята, но это главный ориентир: цифра в заголовке даёт сотню тысяч звёзд.",build:"—",metric:"—",ch:"—",s:{d:5,g:1,f:4,u:5,e:2,v:5},w:2,cap:"—"},
+{id:"memory",t:"Память и задачи для агентов",p:"beads, engram.",cat:"Агентские CLI",lang:"Go",st:"taken",
+inc:[["gastownhall/beads",28880,""],["Gentleman-Programming/engram",8250,""]],
+gap:"Занято и перенасыщено.",build:"—",metric:"—",ch:"—",s:{d:5,g:1,f:4,u:4,e:3,v:3},w:4,cap:"—"},
+{id:"gateway",t:"LLM-шлюз",p:"LiteLLM, bifrost.",cat:"AI для продуктовых команд",lang:"Go",st:"taken",
+inc:[["BerriAI/litellm",63646,""],["maximhq/bifrost",9862,"Go-переписка LiteLLM"]],
+gap:"Переписку LiteLLM на Go уже сделали (bifrost).",build:"—",metric:"—",ch:"—",s:{d:5,g:1,f:4,u:3,e:4,v:3},w:6,cap:"—"},
+{id:"packers",t:"Упаковка репозитория в промпт",p:"repomix, code2prompt.",cat:"Агентские CLI",lang:"TS/Rust",st:"taken",
+inc:[["yamadashy/repomix",29359,""],["mufeedvh/code2prompt",7771,""]],
+gap:"Насыщено.",build:"—",metric:"—",ch:"—",s:{d:4,g:1,f:3,u:3,e:2,v:3},w:2,cap:"—"}
+];
+const K={d:"Спрос",g:"Свобода ниши",f:"Мой профиль",u:"Применю сам",v:"Демо-эффект",e:"Простота"};
+const W={d:2,g:2,f:1.5,u:1,v:1.5,e:1};
+const st={cat:"all",stat:"open",eff:"all",q:"",sort:"score"};
+const fmt=n=>n>=1000?(n/1000).toFixed(n>=10000?0:1).replace(".",",")+"k":String(n);
+const score=x=>{let s=0,m=0;for(const k in W){const v=k==="e"?6-x.s.e:x.s[k];s+=W[k]*v;m+=W[k]*5}return Math.round(s/m*100)};
+function chips(id,key,opts){const el=document.getElementById(id);el.innerHTML=opts.map(([v,l])=>`<button class="chip${st[key]===v?" on":""}" data-v="${v}">${l}</button>`).join(" ");el.onclick=e=>{const b=e.target.closest("button");if(!b)return;st[key]=b.dataset.v;chips(id,key,opts);render()}}
+const cats=[["all","Все"],...[...new Set(D.map(x=>x.cat))].map(c=>[c,c])];
+chips("fcat","cat",cats);
+chips("fstat","stat",[["open","Есть окно"],["taken","Занято (ориентир)"],["all","Все"]]);
+chips("feff","eff",[["all","Любая"],["easy","Лёгкая (1–2)"],["mid","Средняя (3)"],["hard","Высокая (4–5)"]]);
+document.getElementById("wgrid").innerHTML=Object.keys(W).map(k=>`<label>${K[k]} <input type="range" min="0" max="3" step="0.5" value="${W[k]}" data-k="${k}"><b id="w-${k}">${W[k]}</b></label>`).join("");
+document.getElementById("wgrid").oninput=e=>{const k=e.target.dataset.k;if(!k)return;W[k]=+e.target.value;document.getElementById("w-"+k).textContent=W[k];render()};
+document.getElementById("q").oninput=e=>{st.q=e.target.value.toLowerCase();render()};
+document.getElementById("sort").onchange=e=>{st.sort=e.target.value;render()};
+const dots=(k,v)=>`<span>${K[k]} ${[1,2,3,4,5].map(i=>`<i class="${i<=v?"f":""}"></i>`).join("")}</span>`;
+function render(){
+  let L=D.filter(x=>(st.cat==="all"||x.cat===st.cat)&&(st.stat==="all"||x.st===st.stat)&&(st.eff==="all"||(st.eff==="easy"?x.s.e<=2:st.eff==="mid"?x.s.e===3:x.s.e>=4)));
+  if(st.q)L=L.filter(x=>JSON.stringify(x).toLowerCase().includes(st.q));
+  L.forEach(x=>x._s=score(x));
+  const by={score:(a,b)=>b._s-a._s,demand:(a,b)=>b.s.d-a.s.d||b._s-a._s,gap:(a,b)=>b.s.g-a.s.g||b._s-a._s,weeks:(a,b)=>a.w-b.w||b._s-a._s}[st.sort];
+  L.sort(by);
+  document.getElementById("count").textContent=`Показано: ${L.length} из ${D.length}`;
+  document.getElementById("cards").innerHTML=L.map(x=>{
+    const cls=x._s>=75?"hi":x._s>=62?"md":"lo";
+    const inc=x.inc.map(([r,s,n])=>`<span><a href="https://github.com/${r}" target="_blank" rel="noopener">${r}</a> ${fmt(s)}★${n?` <em>— ${n}</em>`:""}</span>`).join("");
+    const det=x.st==="open"?`<details class="more"><summary>Что сделать и как показать</summary><dl><dt>Пробел</dt><dd>${x.gap}</dd><dt>MVP</dt><dd>${x.build}</dd><dt>Метрика для демо</dt><dd>${x.metric}</dd><dt>Где запускать</dt><dd>${x.ch}</dd></dl></details>`:`<div class="more pitch">${x.gap}</div>`;
+    return `<article class="card${x.st==="taken"?" taken":""}">
+      <div class="score ${cls}"><b>${x._s}</b><small>балл</small></div>
+      <div><div class="head"><h3>${x.t}</h3><span class="tag">${x.cat}</span><span class="tag">${x.lang}</span>${x.st==="taken"?'<span class="tag taken">занято</span>':""}</div>
+      <div class="pitch">${x.p}</div>
+      <div class="meta"><span>Потолок: <b>${x.cap}★</b></span><span>MVP: <b>${x.w} нед.</b></span><span>Сложность: <b>${x.s.e}/5</b></span></div>
+      <div class="dots">${["d","g","f","u","v"].map(k=>dots(k,x.s[k])).join("")}</div>
+      <div class="inc">${inc}</div></div>
+      ${det}
+    </article>`}).join("");
+}
+render();
+</script>
+</body>
+</html>
